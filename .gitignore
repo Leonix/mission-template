@@ -1,0 +1,17 @@
+# use glob syntax.
+syntax: glob
+*.pyc
+.svn
+*~
+*.csv
+*.ucsv
+*.wpr
+.DS*
+*.swp
+*.swo
+*.orig
+*.pid
+\.pydevproject
+\.project
+\.settings/org.eclipse.core.resources.prefs
+\.idea

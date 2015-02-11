@@ -1,0 +1,14 @@
+FROM checkio/python-base
+MAINTAINER Igor Lubimov <igor@checkio.org>
+
+COPY envs/run.sh /opt/mission/envs/run.sh
+COPY envs/executor /opt/mission/envs/executor
+COPY envs/{{env}} /opt/mission/envs/{{env}}
+COPY src /opt/mission/src
+COPY requirements.txt /opt/mission/requirements.txt
+
+RUN pip-3.4 install -r /opt/mission/requirements.txt
+
+{{env_instructions}}
+
+ENTRYPOINT ["python3.4", "/opt/mission/src/main.py"]
