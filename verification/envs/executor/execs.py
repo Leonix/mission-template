@@ -196,6 +196,9 @@ class Runner(object):
 
     def action_config(self, data):
         self._config_env(data)
+        return {
+            'status': 'success',
+        }
 
     def action_kill(self, data):
         sys.exit(0)
