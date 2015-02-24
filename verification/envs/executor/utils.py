@@ -1,4 +1,7 @@
+import sys
 from pprint import pformat
+
+PY3 = sys.version_info[0] == 3
 
 
 class AttrDict(object):
@@ -19,6 +22,8 @@ def pformat_none(obj):
 
 
 def unicoder(line):
+    if PY3:
+        return line
     try:
         try:
             return unicode(line)
