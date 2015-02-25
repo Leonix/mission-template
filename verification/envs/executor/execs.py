@@ -39,7 +39,7 @@ def cover_exec(func, data):
 
 def _from_str_to_func(func_code):
     g_data = {}
-    exec(str, g_data)
+    exec(func_code, g_data)
     return g_data['cover']
 
 
@@ -91,7 +91,8 @@ class Runner(object):
             }
         except Exception as e:
             return {
-                'status': 'fail'
+                'status': 'fail',
+                'description': str(e)
             }
 
     def _get_callback(self, execution_data):
