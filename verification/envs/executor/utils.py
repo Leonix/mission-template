@@ -53,24 +53,22 @@ def get_traceback_frames(exc_type, exc_value, tb):
 
     if not frames:
         frames = [{
-                      'filename': '&lt;unknown&gt;',
-                      'function': '?',
-                      'lineno': '?',
-                      'context_line': '???',
-                  }]
+            'filename': '&lt;unknown&gt;',
+            'function': '?',
+            'lineno': '?',
+            'context_line': '???',
+        }]
 
     return frames
 
 
 def str_frames(ex, frames):
     frames.reverse()
-    result = '%s: %s' % (type(ex).__name__, unicoder(ex)) + '\n'
-    trace_lines = []
+    trace_lines = ['%s: %s' % (type(ex).__name__, unicoder(ex))]
     for frame in frames:
         trace_lines.append(' %s, %s' % (frame['function'], frame['lineno']))
-    return result + '\n'.join(trace_lines)
+    return '\n'.join(trace_lines) + '\n'
 
 
 def str_traceback(ex, *args):
     return str_frames(ex, get_traceback_frames(*args))
-

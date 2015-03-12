@@ -1,4 +1,5 @@
 import coloredlogs
+import logging
 import signal
 import sys
 
@@ -8,6 +9,8 @@ from referee import Referee
 
 
 if __name__ == "__main__":
+    logging.info("Start referee in docker")
+
     def handle_signal(sig, frame):
         IOLoop.instance().add_callback(IOLoop.instance().stop)
     signal.signal(signal.SIGINT, handle_signal)
@@ -18,6 +21,9 @@ if __name__ == "__main__":
 
     host = sys.argv[1]
     port = int(sys.argv[2])
-    referee = Referee(host, port, io_loop=io_loop)
+    user_connection_id = sys.argv[3]
+    docker_id = sys.argv[4]
+    referee = Referee(host, port, user_connection_id=user_connection_id, docker_id=docker_id,
+                      io_loop=io_loop)
     referee.start()
     io_loop.start()
