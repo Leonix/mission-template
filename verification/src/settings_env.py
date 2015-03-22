@@ -1,1 +1,1 @@
-CURRENT_ENV = None
+ENVIRONMENTS = None

@@ -95,12 +95,12 @@ def start():
             pass  # for dev version
 
     connect_port = int(sys.argv[1])
-    exec_name = sys.argv[2]
+    environment_id = sys.argv[2]
 
     client = RefereeClient(connect_port)
     execution_data = client.request({
         'status': 'connected',
-        'exec_name': exec_name,
+        'environment_id': environment_id,
         'pid': os.getpid(),
     })
     runner = Runner()

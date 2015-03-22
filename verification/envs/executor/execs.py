@@ -1,15 +1,13 @@
-import logging
-import os
-import sys
 import uuid
 import random
 import re
+import sys
 
 try:
-    import __builtin__
+    import builtins as __builtin__
 except ImportError:
     # http://stackoverflow.com/a/9047762
-    import builtins as __builtin__
+    import __builtin__
 
 from executor.permissions import CLOSE_BUILDINS
 from executor.permissions import ALLOWED_MODULES as _ALLOWED_MODULES
