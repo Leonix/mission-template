@@ -199,7 +199,7 @@ class Runner(object):
             'status': 'success',
         }
 
-    def action_kill(self, data):
+    def action_stop(self, data):
         sys.exit(0)
 
 
