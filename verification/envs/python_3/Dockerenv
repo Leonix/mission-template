@@ -1,3 +1,1 @@
-
-RUN pip install --upgrade pip-accel
-RUN pip install -r /opt/mission/envs/{{env}}/requirements.txt
+RUN pip-3.4 install -r /opt/mission/envs/{{env}}/requirements.txt
