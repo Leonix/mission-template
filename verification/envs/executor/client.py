@@ -13,7 +13,6 @@ PY3 = sys.version_info[0] == 3
 
 class RefereeClient(object):
 
-    TIMEOUT_SOCKET = 12000000
     RECV_DATA_SIZE = 100000000
     DEFAULT_CONNECTION_HOST = '127.0.0.1'
     TERMINATOR = '\0'
@@ -64,7 +63,7 @@ class RefereeClient(object):
         self._client.write(data.encode())
 
     def _recive_data(self, tries=4):
-        self.socket.settimeout(self.TIMEOUT_SOCKET)
+        self.socket.settimeout(None)
         try:
             data = self.socket.recv(self.RECV_DATA_SIZE)
             if PY3:
