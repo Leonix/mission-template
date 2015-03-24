@@ -1,9 +1,7 @@
 FROM checkio/python-base
 MAINTAINER Igor Lubimov <igor@checkio.org>
 
-COPY envs/run.sh /opt/mission/envs/run.sh
-COPY envs/executor /opt/mission/envs/executor
-COPY envs/{{env}} /opt/mission/envs/{{env}}
+COPY envs /opt/mission/envs
 COPY src /opt/mission/src
 COPY requirements.txt /opt/mission/requirements.txt
 
