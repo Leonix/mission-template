@@ -1,5 +1,4 @@
-from checkio_executor_python import client
+import sys
+from checkio_executor_python.client import ClientLoop
 
-
-if __name__ == "__main__":
-    client.start()
+ClientLoop(int(sys.argv[1]), sys.argv[2]).start()
