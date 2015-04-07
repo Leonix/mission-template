@@ -18,6 +18,7 @@ class BaseHandler(object):
     def __init__(self, user_data, server):
         self.server = server
         self.user_data = user_data
+        self.user_data['code'] = open(user_data['code_path']).read()
 
     def route(self, stream_r, method, data, request_id):
         if method not in self.ROUTING:
