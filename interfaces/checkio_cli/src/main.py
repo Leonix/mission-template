@@ -12,7 +12,7 @@ if __name__ == "__main__":
     io_loop = IOLoop.instance()
     server = ServerController(io_loop=io_loop, user_data={
         'action': action,
-        'code': open(code_path).read(),
+        'code_path': code_path,
         'env_name': env_name
     })
     server.listen(port)
