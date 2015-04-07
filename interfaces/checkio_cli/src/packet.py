@@ -38,6 +38,7 @@ class InPacket(PacketBase):
     METHOD_ERROR = 'error'
     METHOD_STATUS = 'status'
     METHOD_SET = 'set'
+    METHOD_PRE_TEST = 'pre_test'
 
     AVAILABLE_METHODS = (METHOD_SELECT, METHOD_STDOUT, METHOD_STDERR, METHOD_RESULT, METHOD_ERROR,
                          METHOD_STATUS, METHOD_SET)

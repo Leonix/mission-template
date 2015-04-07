@@ -1,6 +1,7 @@
-from .interface import TCPConsoleInterfaceServer
+from .base import BaseHandler
 
-class SimplePrintInterface(TCPConsoleInterfaceServer):
+
+class SimplePrintHandler(BaseHandler):
     def handler_pre_test(self, data, request_id, stream_r):
         super().handler_pre_test(data, request_id, stream_r)
         print('TEST: {}'.format(data['representation']))
