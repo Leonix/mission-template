@@ -14,7 +14,7 @@
 #    SCRIPTPATH=`dirname $SCRIPT`
 #fi
 
-SCRIPT=`realpath -s $0`
+SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
 
 python2 $SCRIPTPATH/main.py $1 $2
