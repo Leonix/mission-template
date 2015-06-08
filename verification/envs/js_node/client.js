@@ -40,7 +40,6 @@ ClientLoop.prototype.getVMContext = function() {
 
 ClientLoop.prototype.getVMSandbox = function() {
 	var ret = {
-		'assert': assert,
 		'console': console,
 		'require': require,
 		'setTimeout': setTimeout,
