@@ -1,12 +1,13 @@
 import logging
 import sys
+import os
 
 from tornado.ioloop import IOLoop
 from interface import ServerController
 
 
 if __name__ == "__main__":
-    (_, slug, action, env_name, code_path, port, log_level) = sys.argv
+    (_, slug, action, env_name, code_path, port, log_level, tmp_file_name) = sys.argv
 
     logging.getLogger().setLevel(int(log_level))
     io_loop = IOLoop.instance()
@@ -17,4 +18,6 @@ if __name__ == "__main__":
     })
     server.listen(port)
     logging.info('Start interface')
+    if tmp_file_name != '-':
+        os.remove(tmp_file_name)
     io_loop.start()
