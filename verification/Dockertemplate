@@ -1,11 +1,11 @@
-FROM checkio/python-base
+FROM checkio/mission_base:2015.06.11
 MAINTAINER Igor Lubimov <igor@checkio.org>
 
 COPY envs /opt/mission/envs
 COPY src /opt/mission/src
 COPY requirements.txt /opt/mission/requirements.txt
 
-RUN pip-3.4 install -r /opt/mission/requirements.txt
+RUN pip3.4 install -r /opt/mission/requirements.txt
 
 {{env_instructions}}
 
