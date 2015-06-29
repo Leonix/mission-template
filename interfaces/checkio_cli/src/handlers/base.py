@@ -18,7 +18,14 @@ class BaseHandler(object):
     def __init__(self, user_data, server):
         self.server = server
         self.user_data = user_data
-        self.user_data['code'] = open(user_data['code_path']).read()
+        self.user_data['code'] = self.get_code(user_data['code_path'])
+
+    def get_code(self, code_path):
+        code = open(code_path).read()
+        if code[0:2] == '#!':
+            lines = code.split('\n')
+            code = '\n'.join([''] + lines[1:])
+        return code
 
     def route(self, stream_r, method, data, request_id):
         if method not in self.ROUTING:
