@@ -9,7 +9,17 @@ function ClientLoop(port, environment_id) {
     this.callActions = this.getCallActions();
     this.connection = this.getConnection();
     this.traceError();
+    this.coverCode = function cover(func, data, ctx) {
+        ctx = ctx || this;
+        return func.apply(ctx, [data]);
+    };
 }
+
+ClientLoop.prototype.prepareCoverCode = function (code) {
+    var context = vm.createContext();
+    vm.runInContext(code, context);
+    this.coverCode = context.cover;
+};
 
 ClientLoop.prototype.consoleErrorTraceback = function (err) {
     var lines = err.stack.split('\n'),
@@ -132,7 +142,7 @@ ClientLoop.prototype.actionRunCode = function (data) {
 ClientLoop.prototype.actionRunFunction = function (data) {
     var result;
     try {
-        result = this.vmContext[data.function_name](data.function_args);
+        result = this.coverCode(this.vmContext[data.function_name], data.function_args);
     } catch (err) {
         this.consoleErrorTraceback(err);
         return {
@@ -153,6 +163,9 @@ ClientLoop.prototype.actionConfig = function (data) {
     var config = data.env_config;
     if (config.is_checking) {
         this.is_checking = true;
+    }
+    if (config.cover_code) {
+        this.prepareCoverCode(config.cover_code);
     }
     return {
         'status': 'success'
