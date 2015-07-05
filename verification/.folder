@@ -1,4 +1,2 @@
 replace:
-- main.py
 - requirements.txt
-- Dockerenv

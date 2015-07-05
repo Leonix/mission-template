@@ -1,0 +1,4 @@
+replace:
+- main.js
+- package.json
+- Dockerenv
