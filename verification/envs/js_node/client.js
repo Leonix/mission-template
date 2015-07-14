@@ -3,9 +3,13 @@ var vm = require('vm');
 var util = require('util');
 
 function ClientLoop(port, environment_id) {
-    this.is_checking = false;
     this.connection_port = port;
     this.environment_id = environment_id;
+    this.debug = false;
+}
+
+ClientLoop.prototype.start = function () {
+    this.is_checking = false;
     this.callActions = this.getCallActions();
     this.connection = this.getConnection();
     this.traceError();
@@ -13,7 +17,7 @@ function ClientLoop(port, environment_id) {
         ctx = ctx || this;
         return func.apply(ctx, [data]);
     };
-}
+};
 
 ClientLoop.prototype.prepareCoverCode = function (code) {
     var context = vm.createContext();
@@ -33,6 +37,8 @@ ClientLoop.prototype.consoleErrorTraceback = function (err) {
             if (line.slice(0, 15) === 'at evalmachine.') {
                 console.error(lines[i]);
                 from_vm = true;
+            } else if (this.debug) {
+                console.error(lines[i]);
             }
         } else {
             console.error(lines[i]);
