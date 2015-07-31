@@ -66,7 +66,12 @@ ClientLoop.prototype.getVMSandbox = function () {
         'setTimeout': setTimeout,
         'clearTimeout': clearTimeout,
         'setInterval': setInterval,
-        'clearInterval': clearInterval
+        'clearInterval': clearInterval,
+        'setImmediate': setImmediate,
+        'clearImmediate': clearImmediate,
+        'Array': Array,
+        'Object': Object,
+        'Date': Date
     };
     if (this.is_checking) {
         ret.is_checking = true;
