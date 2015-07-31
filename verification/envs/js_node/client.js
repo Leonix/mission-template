@@ -6,6 +6,7 @@ function ClientLoop(port, environment_id) {
     this.connection_port = port;
     this.environment_id = environment_id;
     this.debug = false;
+    this.TMP_VAR = '__TMP_DATA';
 }
 
 ClientLoop.prototype.start = function () {
@@ -68,10 +69,7 @@ ClientLoop.prototype.getVMSandbox = function () {
         'setInterval': setInterval,
         'clearInterval': clearInterval,
         'setImmediate': setImmediate,
-        'clearImmediate': clearImmediate,
-        'Array': Array,
-        'Object': Object,
-        'Date': Date
+        'clearImmediate': clearImmediate
     };
     if (this.is_checking) {
         ret.is_checking = true;
@@ -151,9 +149,12 @@ ClientLoop.prototype.actionRunCode = function (data) {
 };
 
 ClientLoop.prototype.actionRunFunction = function (data) {
-    var result;
+    var result, var_result;
     try {
-        result = this.coverCode(this.vmContext[data.function_name], data.function_args);
+        vm.runInContext(this.TMP_VAR + ' = ' + JSON.stringify(data.function_args), this.vmContext);
+        var_result = this.vmContext[this.TMP_VAR];
+        delete this.vmContext[this.TMP_VAR];
+        result = this.coverCode(this.vmContext[data.function_name], var_result);
     } catch (err) {
         this.consoleErrorTraceback(err);
         return {
