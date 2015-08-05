@@ -1,11 +1,11 @@
-import coloredlogs
 import logging
 import signal
 import sys
 
 from tornado.ioloop import IOLoop
-
 from referee import Referee
+
+from logs import init_logging
 
 
 if __name__ == "__main__":
@@ -16,18 +16,21 @@ if __name__ == "__main__":
     try:
         log_level = int(sys.argv[5])
     except IndexError:
-        pass
+        init_logging(logging.INFO)
     else:
-        coloredlogs.install(level=log_level)
-        logging.getLogger().setLevel(log_level)
+        init_logging(log_level, config={
+            'root': {
+                'handlers': ['console'],
+            }
+        })
 
-    logging.info("Start referee in docker")
+    logger = logging.getLogger()
+    logger.debug("Start referee in docker")
 
     def handle_signal(sig, frame):
         IOLoop.instance().add_callback(IOLoop.instance().stop)
     signal.signal(signal.SIGINT, handle_signal)
     signal.signal(signal.SIGTERM, handle_signal)
-    coloredlogs.install()
 
     io_loop = IOLoop.instance()
 
