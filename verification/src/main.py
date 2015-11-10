@@ -16,7 +16,7 @@ if __name__ == "__main__":
     try:
         log_level = int(sys.argv[5])
     except IndexError:
-        init_logging(logging.INFO)
+        init_logging(logging.DEBUG)
     else:
         init_logging(log_level, config={
             'root': {
