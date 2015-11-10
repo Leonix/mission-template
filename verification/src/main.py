@@ -25,7 +25,8 @@ if __name__ == "__main__":
         })
 
     logger = logging.getLogger()
-    logger.debug("Start referee in docker")
+    logger.info("START Host:{} PORT:{} CONNECTION_ID:{} DOCKER_ID:{}".format(
+        host, port, user_connection_id, docker_id))
 
     def handle_signal(sig, frame):
         IOLoop.instance().add_callback(IOLoop.instance().stop)
