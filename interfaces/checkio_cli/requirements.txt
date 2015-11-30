@@ -1,1 +1,0 @@
-pip # a stub requirement needed because pip complains about an empty requirements.txt file
